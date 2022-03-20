@@ -1,1 +1,3 @@
-*.yml
+configs/dev.yml
+.idea
+.DS_Store

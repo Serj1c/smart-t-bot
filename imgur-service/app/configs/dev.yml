@@ -1,0 +1,24 @@
+---
+
+is_debug: true
+is_development: true
+listen:
+  type: port
+  bind_ip: 0.0.0.0
+  port: 10007
+app:
+  log_level: trace
+token: 5132540946:AAFT3bS_PLHMuVOPAqy9H3J_haLzsFo27T8
+api_url: https://www.googleapis.com/youtube/v3
+rabbitmq:
+  host: "localhost"
+  port: 5672
+  username: "guest"
+  password: "guest"
+  consumer:
+    youtube: "yt-resp-events"
+    imgur: "img-resp-events"
+    messages_buf_size: 100
+  producer:
+    youtube: "yt-resp-events"
+    imgur: "img-resp-events"

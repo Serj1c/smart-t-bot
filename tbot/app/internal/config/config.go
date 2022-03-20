@@ -8,33 +8,29 @@ import (
 )
 
 type Config struct {
-	IsDebug       *bool `yaml:"is_debug" env:"DATA-BOT-IsDebug" env-default:"false"  env-required:"true"`
-	IsDevelopment *bool `yaml:"is_development" env:"DATA-BOT-IsDevelopment" env-default:"false" env-required:"true"`
-	Listen        struct {
-		Type   string `yaml:"type" env:"DATA-BOT-ListenType" env-default:"port"`
-		BindIP string `yaml:"bind_ip" env:"DATA-BOT-BindIP" env-default:"localhost"`
-		Port   string `yaml:"port" env:"DATA-BOT-Port" env-default:"8080"`
-	} `yaml:"listen" env-required:"true"`
-	Telegram struct {
-		Token string `yaml:"token" env:"DATA-BOT-TelegramToken" env-required:"true"`
+	IsDebug       *bool `yaml:"is_debug" env:"BOT_IS_DEBUG" env-default:"false"  env-required:"true"`
+	IsDevelopment *bool `yaml:"is_development" env:"BOT_IS_DEVELOPMENT" env-default:"false" env-required:"true"`
+	Telegram      struct {
+		Token string `yaml:"token" env:"BOT_TELEGRAM_TOKEN" env-required:"true"`
 	}
-	Imgur struct {
-		AccessToken  string `yaml:"access_token" env:"DATA-BOT-ImgurAccessToken" env-required:"true"`
-		ClientSecret string `yaml:"client_secret" env:"DATA-BOT-ImgurClientSecret" env-required:"true"`
-		ClientID     string `yaml:"client_id" env:"DATA-BOT-ImgurClientID" env-required:"true"`
-		URL          string `yaml:"url" env:"DATA-BOT-ImgurURL" env-required:"true"`
-	} `yaml:"imgur"`
+	Listen struct {
+		Type   string `yaml:"type" env:"BOT_LISTEN_TYPE" env-default:"port"`
+		BindIP string `yaml:"bind_ip" env:"BOT_BIND_IP" env-default:"localhost"`
+		Port   string `yaml:"port" env:"BOT_PORT" env-default:"8080"`
+	} `yaml:"listen" env-required:"true"`
 	RabbitMQ struct {
-		Host     string `yaml:"host" env:"DATA-BOT-RabbitHost" env-required:"true"`
-		Port     string `yaml:"port" env:"DATA-BOT-RabbitPort" env-required:"true"`
-		Username string `yaml:"username" env:"DATA-BOT-RabbitUsername" env-required:"true"`
-		Password string `yaml:"password" env:"DATA-BOT-RabbitPassword" env-required:"true"`
+		Host     string `yaml:"host" env:"BOT_RABBIT_HOST" env-required:"true"`
+		Port     string `yaml:"port" env:"BOT_RABBIT_PORT" env-required:"true"`
+		Username string `yaml:"username" env:"BOT_RABBIT_USERNAME" env-required:"true"`
+		Password string `yaml:"password" env:"BOT_RABBIT_PASSWORD" env-required:"true"`
 		Consumer struct {
-			Queue              string `yaml:"queue" env:"DATA-BOT-RabbitConsumerQueue" env-required:"true"`
-			MessagesBufferSize int    `yaml:"messages_buffer_size" env:"DATA-BOT-RabbitConsumerMBS" env-required:"true"`
+			Youtube            string `yaml:"youtube" env:"BOT_RABBIT_CONSUMER_YOUTUBE" env-required:"true"`
+			Imgur              string `yaml:"imgur" env:"BOT_RABBIT_CONSUMER_IMGUR" env-required:"true"`
+			MessagesBufferSize int    `yaml:"messages_buffer_size" env:"BOT_RABBIT_CONSUMER_MBS" env-required:"true"`
 		} `yaml:"consumer" env-required:"true"`
 		Producer struct {
-			Queue string `yaml:"queue" env:"DATA-BOT-RabbitProducerQueue" env-required:"true"`
+			Youtube string `yaml:"youtube" env:"BOT_RABBIT_PRODUCER_YOUTUBE" env-required:"true"`
+			Imgur   string `yaml:"imgur" env:"BOT_RABBIT_PRODUCER_IMGUR" env-required:"true"`
 		} `yaml:"producer" env-required:"true"`
 	} `yaml:"rabbit_mq" env-required:"true"`
 	AppConfig AppConfig `yaml:"app" env-required:"true"`
