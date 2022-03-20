@@ -13,11 +13,6 @@ type Config struct {
 	Telegram      struct {
 		Token string `yaml:"token" env:"BOT_TELEGRAM_TOKEN" env-required:"true"`
 	}
-	Listen struct {
-		Type   string `yaml:"type" env:"BOT_LISTEN_TYPE" env-default:"port"`
-		BindIP string `yaml:"bind_ip" env:"BOT_BIND_IP" env-default:"localhost"`
-		Port   string `yaml:"port" env:"BOT_PORT" env-default:"8080"`
-	} `yaml:"listen" env-required:"true"`
 	RabbitMQ struct {
 		Host     string `yaml:"host" env:"BOT_RABBIT_HOST" env-required:"true"`
 		Port     string `yaml:"port" env:"BOT_RABBIT_PORT" env-required:"true"`
@@ -37,8 +32,11 @@ type Config struct {
 }
 
 type AppConfig struct {
-	EventWorkers int    `yaml:"event_workers" env:"DATA-BOT-EventWorks" env-default:"3" env-required:"true"`
-	LogLevel     string `yaml:"log_level" env:"DATA-BOT-LogLevel" env-default:"error" env-required:"true"`
+	EventWorkers struct {
+		Youtube int `yaml:"youtube" env:"BOT_EVENT_WORKERS_YT" env-default:"3" env-required:"true"`
+		Imgur   int `yaml:"imgur" env:"BOT_EVENT_WORKERS_IMGUR" env-default:"3" env-required:"true"`
+	} `yaml:"event_workers"`
+	LogLevel string `yaml:"log_level" env:"BOT_LOG_LEVEL" env-default:"error" env-required:"true"`
 }
 
 var instance *Config
